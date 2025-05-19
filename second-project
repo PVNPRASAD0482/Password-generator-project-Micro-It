@@ -1,3 +1,4 @@
+# Import necessary modules
 from flask import Flask, render_template, request
 import random
 import string
@@ -36,3 +37,93 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+-------HTML----------
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Password Generator</h2>
+        <form method="post">
+            <label>Password Length:</label>
+            <input type="number" name="length" min="4" max="50" value="12" required><br>
+
+            <label><input type="checkbox" name="upper" checked> Include Uppercase</label><br>
+            <label><input type="checkbox" name="lower" checked> Include Lowercase</label><br>
+            <label><input type="checkbox" name="digits" checked> Include Digits</label><br>
+            <label><input type="checkbox" name="special"> Include Special Characters</label><br><br>
+
+            <button type="submit">Generate Password</button>
+        </form>
+
+        {% if password %}
+        <div class="result">
+            <strong>Generated Password:</strong>
+            <p>{{ password }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+-------------CSS----------------
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 25px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    width: 400px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #555;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.result {
+    margin-top: 20px;
+    background: #f8f9fa;
+    padding: 10px;
+    border-left: 4px solid #007bff;
+}
